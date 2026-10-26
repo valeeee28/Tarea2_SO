@@ -34,4 +34,5 @@ void inicializarTablero(Tablero& tablero);
 void mostrarTablero(Tablero& tablero);
 void destruirTablero(Tablero& tablero);
 
-#endif
+#endif 
+ 
