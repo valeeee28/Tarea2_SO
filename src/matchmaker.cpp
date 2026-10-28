@@ -1,6 +1,6 @@
 
 #include "matchmaker.h"
-
+#include<algorithm>
 #include <iostream>
 #include <stdexcept>
 
@@ -71,7 +71,6 @@ void Matchmaker::detener() {
 
 void Matchmaker::gestionarJugadores() {
     int idJugador = 1;
-    int idMesa = 1;
 
     while (true) {
         std::unique_lock<std::mutex> bloqueo(mutex_);
@@ -95,11 +94,13 @@ void Matchmaker::gestionarJugadores() {
             break;
         }
 
-        Partida partida{
-            idMesa++,
-            {idJugador++, RolJugador::PUMA},
-            {idJugador++, RolJugador::PERROS}
-        };
+       int mesaAsignada = ((jugadoresProcesados_ / 2) % maxMesas_) + 1;
+
+Partida partida{
+    mesaAsignada,
+    {idJugador++, RolJugador::PUMA},
+    {idJugador++, RolJugador::PERROS}
+};
 
         jugadoresProcesados_ += 2;
 
@@ -108,7 +109,7 @@ void Matchmaker::gestionarJugadores() {
                   << " vs. equipo de Perros "
                   << partida.perros.id << '\n';
 
-        colaPartidas_.push(partida);
+        colaPartidas_.push_back(partida);
 
         bloqueo.unlock();
         cv_.notify_all();
