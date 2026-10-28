@@ -6,7 +6,24 @@
 #include <mutex>
 #include <queue>
 #include <thread>
+#include <utility>
 #include <vector>
+
+enum class RolJugador {
+    PUMA,
+    PERROS
+};
+
+struct Jugador {
+    int id;
+    RolJugador rol;
+};
+
+struct Partida {
+    int idMesa;
+    Jugador puma;
+    Jugador perros;
+};
 
 class Matchmaker {
 public:
@@ -17,6 +34,7 @@ public:
     Matchmaker& operator=(const Matchmaker&) = delete;
 
     void iniciar();
+    void esperarFinalizacion();
     void detener();
 
 private:
@@ -27,13 +45,14 @@ private:
     int maxMesas_;
 
     int jugadoresProcesados_ = 0;
-    int mesasActivas_ = 0;
     bool detenido_ = false;
+    bool iniciado_ = false;
 
     std::mutex mutex_;
     std::condition_variable cv_;
-    std::queue<int> colaJugadores_;
+    std::queue<Partida> colaPartidas_;
     std::vector<std::thread> hilosMesas_;
+    std::thread hiloGestor_;
 };
 
 #endif
