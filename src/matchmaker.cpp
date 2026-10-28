@@ -1,12 +1,13 @@
-
+#include "../juez.h"
 #include "matchmaker.h"
 #include<algorithm>
 #include <iostream>
 #include <stdexcept>
 
-Matchmaker::Matchmaker(int totalJugadores, int maxMesas)
+Matchmaker::Matchmaker(int totalJugadores, int maxMesas, const Config& config)
     : totalJugadores_(totalJugadores),
-      maxMesas_(maxMesas) {
+      maxMesas_(maxMesas),
+      config_(config) {
     if (totalJugadores < 0 || maxMesas <= 0) {
         throw std::invalid_argument(
             "La cantidad de jugadores no puede ser negativa "
@@ -44,6 +45,14 @@ void Matchmaker::iniciar() {
 void Matchmaker::esperarFinalizacion() {
     if (hiloGestor_.joinable()) {
         hiloGestor_.join();
+    }
+
+    cv_.notify_all();
+
+    for (std::thread& hilo : hilosMesas_) {
+        if (hilo.joinable()) {
+            hilo.join();
+        }
     }
 }
 
@@ -114,9 +123,14 @@ Partida partida{
         bloqueo.unlock();
         cv_.notify_all();
     }
+    {
+        std::lock_guard<std::mutex> bloqueo(mutex_);
+        gestorTerminado_ = true;
+    }
 
     cv_.notify_all();
 }
+
 
 void Matchmaker::ejecutarPartida(int idMesa) {
     while (true) {
@@ -125,52 +139,67 @@ void Matchmaker::ejecutarPartida(int idMesa) {
         {
             std::unique_lock<std::mutex> bloqueo(mutex_);
 
-            
-cv_.wait(bloqueo, [this, idMesa] {
-    if (detenido_) {
-        return true;
-    }
+            cv_.wait(bloqueo, [this, idMesa] {
+                if (detenido_) {
+                    return true;
+                }
 
-    for (const Partida& pendiente : colaPartidas_) {
-        if (pendiente.idMesa == idMesa) {
-            return true;
-        }
-    }
+                for (const Partida& pendiente : colaPartidas_) {
+                    if (pendiente.idMesa == idMesa) {
+                        return true;
+                    }
+                }
 
-    return false;
-});
+                return gestorTerminado_;
+            });
 
-if (detenido_) {
-    return;
-}
+            if (detenido_) {
+                return;
+            }
 
-auto it = std::find_if(
-    colaPartidas_.begin(),
-    colaPartidas_.end(),
-    [idMesa](const Partida& pendiente) {
-        return pendiente.idMesa == idMesa;
-    }
-);
+            auto it = std::find_if(
+                colaPartidas_.begin(),
+                colaPartidas_.end(),
+                [idMesa](const Partida& pendiente) {
+                    return pendiente.idMesa == idMesa;
+                }
+            );
 
-if (it == colaPartidas_.end()) {
-    continue;
-}
+            if (it == colaPartidas_.end()) {
+                if (gestorTerminado_) {
+                    return;
+                }
+                continue;
+            }
 
-partida = *it;
-colaPartidas_.erase(it);
-
+            partida = *it;
+            colaPartidas_.erase(it);
         }
 
         cv_.notify_all();
 
-        std::cout << "Mesa " << idMesa
-                  << ": iniciando partida "
-                  << partida.idMesa << ".\n";
+        ConfigSimulacion configJuez;
+        configJuez.semilla = config_.seed;
+        configJuez.retardoMinMs = config_.delayMinMs;
+        configJuez.retardoMaxMs = config_.delayMaxMs;
 
-        // TODO: integrar aquí el juez y la lógica del tablero.
+        {
+            std::lock_guard<std::mutex> bloqueoSalida(mutexSalida_);
+            std::cout << "Mesa " << idMesa
+                      << ": iniciando partida. Puma " << partida.puma.id
+                      << " vs. Perros " << partida.perros.id << ".\n";
+        }
 
-        std::cout << "Mesa " << idMesa
-                  << ": finalizada partida "
-                  << partida.idMesa << ".\n";
+        ResultadoJuez resultado = ejecutarJuez(idMesa, configJuez);
+
+        {
+            std::lock_guard<std::mutex> bloqueoSalida(mutexSalida_);
+            std::cout << "Mesa " << idMesa
+                      << ": partida finalizada. Estado: "
+                      << resultado.estado
+                      << ", movimientos: " << resultado.movimientos
+                      << ", capturas: " << resultado.capturas << ".\n";
+        }
     }
 }
+

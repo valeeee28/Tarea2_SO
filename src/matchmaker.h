@@ -8,6 +8,7 @@
 #include <thread>
 #include <utility>
 #include <vector>
+#include "config.h"
 
 enum class RolJugador {
     PUMA,
@@ -27,7 +28,8 @@ struct Partida {
 
 class Matchmaker {
 public:
-    Matchmaker(int totalJugadores, int maxMesas);
+Matchmaker(int totalJugadores, int maxMesas,
+           const Config& config = Config{});
     ~Matchmaker();
 
     Matchmaker(const Matchmaker&) = delete;
@@ -47,7 +49,9 @@ private:
     int jugadoresProcesados_ = 0;
     bool detenido_ = false;
     bool iniciado_ = false;
+    bool gestorTerminado_ = false;
 
+    Config config_;
     std::mutex mutex_;
     std::condition_variable cv_;
     std::mutex mutexSalida_;
