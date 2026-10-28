@@ -124,16 +124,40 @@ void Matchmaker::ejecutarPartida(int idMesa) {
         {
             std::unique_lock<std::mutex> bloqueo(mutex_);
 
-            cv_.wait(bloqueo, [this] {
-                return detenido_ || !colaPartidas_.empty();
-            });
+            
+cv_.wait(bloqueo, [this, idMesa] {
+    if (detenido_) {
+        return true;
+    }
 
-            if (detenido_) {
-                return;
-            }
+    for (const Partida& pendiente : colaPartidas_) {
+        if (pendiente.idMesa == idMesa) {
+            return true;
+        }
+    }
 
-            partida = colaPartidas_.front();
-            colaPartidas_.pop();
+    return false;
+});
+
+if (detenido_) {
+    return;
+}
+
+auto it = std::find_if(
+    colaPartidas_.begin(),
+    colaPartidas_.end(),
+    [idMesa](const Partida& pendiente) {
+        return pendiente.idMesa == idMesa;
+    }
+);
+
+if (it == colaPartidas_.end()) {
+    continue;
+}
+
+partida = *it;
+colaPartidas_.erase(it);
+
         }
 
         cv_.notify_all();

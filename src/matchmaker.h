@@ -50,7 +50,7 @@ private:
 
     std::mutex mutex_;
     std::condition_variable cv_;
-    std::queue<Partida> colaPartidas_;
+    std::vector<Partida> colaPartidas_;
     std::vector<std::thread> hilosMesas_;
     std::thread hiloGestor_;
 };
