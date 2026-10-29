@@ -23,7 +23,7 @@ int main(int argc, char* argv[]) {
             }
         }
 
-        Matchmaker servidor(totalJugadores, maxMesas);
+        Matchmaker servidor(totalJugadores, maxMesas,config);
 
         std::cout << "Servidor Komikan iniciado.\n";
 

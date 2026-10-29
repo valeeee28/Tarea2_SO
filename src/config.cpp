@@ -32,6 +32,11 @@ bool cargarConfiguracion(const std::string& ruta, Config& config) {
                 std::cerr << "Valor inválido para SEED\n";
                 return false;
             }
+        } else if (clave == "DURACION_MAX") {
+            if (!(archivo >> config.duracionMaxMs)) {
+                std::cerr << "Valor inválido para DURACION_MAX\n";
+                return false;
+            }
         } else {
             std::string valorIgnorado;
             if (!(archivo >> valorIgnorado)) {
@@ -44,6 +49,11 @@ bool cargarConfiguracion(const std::string& ruta, Config& config) {
     if (config.delayMinMs < 0 ||
         config.delayMaxMs < config.delayMinMs) {
         std::cerr << "Los retardos de configuración no son válidos\n";
+        return false;
+    }
+
+    if (config.duracionMaxMs < 1) {
+        std::cerr << "DURACION_MAX debe ser mayor que cero\n";
         return false;
     }
 

@@ -49,6 +49,7 @@ void* funcionJuez(void* argumento) {
 
     ResultadoSimulacion simulacion =
         simularPartida(tablero, datos->config);
+        
 
     datos->resultado.movimientos = simulacion.movimientos;
     datos->resultado.capturas = simulacion.capturas;

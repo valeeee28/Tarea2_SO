@@ -4,6 +4,7 @@
 #include <string>
 
 struct Config {
+    int duracionMaxMs = 5000;
     int delayMinMs = 50;
     int delayMaxMs = 300;
     unsigned int seed = 42;

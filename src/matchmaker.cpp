@@ -182,7 +182,7 @@ void Matchmaker::ejecutarPartida(int idMesa) {
         configJuez.semilla = config_.seed;
         configJuez.retardoMinMs = config_.delayMinMs;
         configJuez.retardoMaxMs = config_.delayMaxMs;
-
+        configJuez.duracionMaxMs=config_.duracionMaxMs;
         {
             std::lock_guard<std::mutex> bloqueoSalida(mutexSalida_);
             std::cout << "Mesa " << idMesa
