@@ -1,0 +1,32 @@
+Servidor Komikan iniciado.
+Partida 1: Puma 1 vs. equipo de Perros 2
+Partida 2: Puma 3 vs. equipo de Perros 4
+Partida 1: Puma 5 vs. equipo de Perros 6
+Mesa 1: iniciando partida. Puma 1 vs. Perros 2.
+Partida 2: Puma 7 vs. equipo de Perros 8
+Mesa 2: iniciando partida. Puma 3 vs. Perros 4.
+
+SIGINT recibido. Solicitando cierre ordenado...
+
+--- TABLERO KOMIKAN ---
+    .
+  D   D
+. D D D . 
+D . . . . 
+. D . . D 
+D . P D . 
+. . . D D 
+Perros capturados: 0
+Mesa 2: partida finalizada. Estado: 3, movimientos: 14, capturas: 0.
+
+--- TABLERO KOMIKAN ---
+    D
+  .   D
+D D . D . 
+. . D . . 
+. D . D D 
+D . P . . 
+. . . D D 
+Perros capturados: 0
+Mesa 1: partida finalizada. Estado: 3, movimientos: 18, capturas: 0.
+Torneo finalizado correctamente.

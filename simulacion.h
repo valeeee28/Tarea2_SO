@@ -4,6 +4,8 @@
 
 #include "board.h"
 #include <atomic>
+#include <array>
+
 
 struct ConfigSimulacion {
     unsigned int semilla = 42;
@@ -11,7 +13,13 @@ struct ConfigSimulacion {
     int retardoMaxMs = 300;
     int duracionMaxMs = 5000;
     bool imprimirTableroFinal = true;
+
+    bool posicionesPersonalizadas = false;
+    Posicion pumaInicial = {2, 2};
+    std::vector<Posicion> perrosIniciales;
+    int imprimirCadaMovimientos = 20;
 };
+
 
 enum MotivoFinSimulacion {
     FIN_ERROR = -1,

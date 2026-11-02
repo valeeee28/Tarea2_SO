@@ -1,0 +1,2364 @@
+Servidor Komikan iniciado.
+Partida 1: Puma 1 vs. equipo de Perros 2
+Partida 2: Puma 3 vs. equipo de Perros 4
+Partida 1: Puma 5 vs. equipo de Perros 6
+Mesa 1: iniciando partida. Puma 1 vs. Perros 2.
+Partida 2: Puma 7 vs. equipo de Perros 8
+Mesa 2: iniciando partida. Puma 3 vs. Perros 4.
+
+Movimiento 20
+
+--- TABLERO KOMIKAN ---
+    D
+  D   D
+D . . D . 
+. . D . . 
+. D . . . 
+D P D D . 
+. . . D D 
+Perros capturados: 0
+
+Movimiento 20
+
+--- TABLERO KOMIKAN ---
+    D
+  D   D
+D . . D . 
+. D . . . 
+. D . D D 
+. P . . D 
+D . . D . 
+Perros capturados: 0
+
+Movimiento 40
+
+--- TABLERO KOMIKAN ---
+    .
+  D   .
+D D D D . 
+. D D . . 
+. P . . . 
+. . D D D 
+. . D . . 
+Perros capturados: 1
+
+Movimiento 40
+
+--- TABLERO KOMIKAN ---
+    D
+  .   .
+D . D D . 
+D . D . D 
+. . D D . 
+. D . . D 
+. P D . . 
+Perros capturados: 0
+
+Movimiento 60
+
+--- TABLERO KOMIKAN ---
+    .
+  .   D
+. D D D . 
+. D . D . 
+. D P D . 
+. D . D . 
+. . . . D 
+Perros capturados: 1
+
+Movimiento 60
+
+--- TABLERO KOMIKAN ---
+    D
+  .   .
+D D D . D 
+. . . D D 
+D . P . . 
+. D . . . 
+. D . D . 
+Perros capturados: 1
+
+Movimiento 80
+
+--- TABLERO KOMIKAN ---
+    .
+  D   .
+D . . D D 
+. D . D D 
+D D . P . 
+. . . . . 
+D . . D . 
+Perros capturados: 1
+
+Movimiento 80
+
+--- TABLERO KOMIKAN ---
+    .
+  D   D
+D . P . . 
+D . . . D 
+D D . . D 
+. . . D . 
+. . . D . 
+Perros capturados: 2
+
+Movimiento 100
+
+--- TABLERO KOMIKAN ---
+    .
+  D   .
+D . D . D 
+. D . P D 
+. D D . D 
+D . . . D 
+. . . . . 
+Perros capturados: 1
+
+Movimiento 100
+
+--- TABLERO KOMIKAN ---
+    .
+  D   .
+D . D . D 
+. . . P . 
+D D . . . 
+. D . . D 
+. D . . D 
+Perros capturados: 2
+
+Movimiento 120
+
+--- TABLERO KOMIKAN ---
+    .
+  D   D
+D D . D D 
+. . . . P 
+. D . . D 
+. D D D . 
+. . . . . 
+Perros capturados: 1
+
+Movimiento 120
+
+--- TABLERO KOMIKAN ---
+    .
+  .   D
+D D D . . 
+. . . D D 
+. . . . P 
+. . D D . 
+D . . D . 
+Perros capturados: 2
+
+Movimiento 140
+
+--- TABLERO KOMIKAN ---
+    D
+  .   .
+D D D . . 
+. . D P . 
+D D . . D 
+. D . D . 
+. . D . . 
+Perros capturados: 1
+
+Movimiento 140
+
+--- TABLERO KOMIKAN ---
+    .
+  D   D
+. . . . P 
+. D . D . 
+. . . . . 
+D D . . D 
+. . D D . 
+Perros capturados: 3
+
+Movimiento 160
+
+--- TABLERO KOMIKAN ---
+    D
+  .   D
+. D . . . 
+D D . D . 
+. . . P . 
+. . D . . 
+D D . D . 
+Perros capturados: 2
+
+Movimiento 160
+
+--- TABLERO KOMIKAN ---
+    D
+  .   .
+D . . . P 
+. . . D . 
+D . . . D 
+. . D . . 
+. D . D . 
+Perros capturados: 4
+
+Movimiento 180
+
+--- TABLERO KOMIKAN ---
+    .
+  D   .
+D . D . . 
+D . . D D 
+. D D . P 
+. . . . . 
+. . D . D 
+Perros capturados: 2
+
+Movimiento 180
+
+--- TABLERO KOMIKAN ---
+    P
+  .   .
+. D . D . 
+D . . D . 
+. D . . . 
+. . D . . 
+. . D D . 
+Perros capturados: 4
+
+Movimiento 200
+
+--- TABLERO KOMIKAN ---
+    D
+  D   .
+. D . . . 
+D . D D . 
+. . . . D 
+. P . . D 
+. . . . D 
+Perros capturados: 3
+
+Movimiento 200
+
+--- TABLERO KOMIKAN ---
+    D
+  .   .
+. D . . P 
+D . D . D 
+. . . . . 
+. D . . . 
+. . D . D 
+Perros capturados: 4
+
+Movimiento 220
+
+--- TABLERO KOMIKAN ---
+    .
+  D   .
+. . . . . 
+. D D . D 
+D . D D . 
+. . . . . 
+. . D P . 
+Perros capturados: 4
+
+Movimiento 220
+
+--- TABLERO KOMIKAN ---
+    D
+  .   .
+. D . . . 
+. D . P . 
+. . . . . 
+D D . . D 
+D . . D . 
+Perros capturados: 4
+
+Movimiento 240
+
+--- TABLERO KOMIKAN ---
+    .
+  D   .
+. D D . . 
+D . . . . 
+. D . . D 
+. . . . D 
+D . P . . 
+Perros capturados: 4
+
+Movimiento 240
+
+--- TABLERO KOMIKAN ---
+    .
+  .   D
+. . D . . 
+D . . . . 
+D . . . . 
+D . P . . 
+D . . D . 
+Perros capturados: 5
+
+Movimiento 260
+
+--- TABLERO KOMIKAN ---
+    .
+  D   .
+. . D . . 
+D . . . . 
+. . D D . 
+P . D . . 
+. . . D . 
+Perros capturados: 5
+
+Movimiento 280
+
+--- TABLERO KOMIKAN ---
+    .
+  .   .
+D D D . D 
+. . . D . 
+. P . D . 
+. . . D . 
+. . . . . 
+Perros capturados: 5
+
+--- TABLERO KOMIKAN ---
+    .
+  .   .
+. D D . . 
+. D . P . 
+D . . . . 
+. . . . . 
+. . D . D 
+Perros capturados: 6
+Mesa 1: partida finalizada. Estado: 1, movimientos: 259, capturas: 6.
+Mesa 1: iniciando partida. Puma 5 vs. Perros 6.
+Partida 1: Puma 9 vs. equipo de Perros 10
+
+Movimiento 300
+
+--- TABLERO KOMIKAN ---
+    .
+  D   D
+D . . . . 
+. . D D . 
+. P . D D 
+. . . . . 
+. . . . . 
+Perros capturados: 5
+
+Movimiento 20
+
+--- TABLERO KOMIKAN ---
+    D
+  D   D
+D . . D . 
+. . D . . 
+. D . D . 
+D P . D . 
+. . . D D 
+Perros capturados: 0
+
+Movimiento 40
+
+--- TABLERO KOMIKAN ---
+    .
+  D   D
+D . D D . 
+. D D . . 
+. . D . . 
+. D D . D 
+. P D . . 
+Perros capturados: 0
+
+Movimiento 320
+
+--- TABLERO KOMIKAN ---
+    .
+  .   D
+D . . . D 
+. . . P . 
+. D . . D 
+D . D . . 
+. . . . . 
+Perros capturados: 5
+
+Movimiento 60
+
+--- TABLERO KOMIKAN ---
+    .
+  D   D
+. D D . . 
+. D . D . 
+D . P . D 
+D . . . D 
+. . . . D 
+Perros capturados: 1
+
+Movimiento 340
+
+--- TABLERO KOMIKAN ---
+    .
+  D   P
+. . . . D 
+D . D . . 
+. . D . . 
+. D . D . 
+. . . . . 
+Perros capturados: 5
+
+Movimiento 80
+
+--- TABLERO KOMIKAN ---
+    D
+  D   D
+D . . . D 
+D . . D . 
+. . . . . 
+. D P D . 
+D . . . D 
+Perros capturados: 1
+
+Movimiento 100
+
+--- TABLERO KOMIKAN ---
+    .
+  D   .
+. D D . D 
+D D D . . 
+D . . . D 
+D . . . D 
+. . P . . 
+Perros capturados: 1
+
+Movimiento 360
+
+--- TABLERO KOMIKAN ---
+    .
+  .   P
+. . . D . 
+D . . . . 
+. D . D . 
+. . . . . 
+D D . . D 
+Perros capturados: 5
+
+Movimiento 120
+
+--- TABLERO KOMIKAN ---
+    .
+  D   .
+. . D D D 
+. D D . . 
+D . . D . 
+P D . D D 
+. . . . . 
+Perros capturados: 1
+
+--- TABLERO KOMIKAN ---
+    .
+  .   .
+. . . . . 
+D . . P . 
+. D . D . 
+. . . . . 
+D D . . D 
+Perros capturados: 6
+Mesa 2: partida finalizada. Estado: 1, movimientos: 361, capturas: 6.
+Mesa 2: iniciando partida. Puma 7 vs. Perros 8.
+Partida 2: Puma 11 vs. equipo de Perros 12
+
+Movimiento 140
+
+--- TABLERO KOMIKAN ---
+    D
+  .   D
+D . . . D 
+P D . D . 
+. . D . . 
+. D . D . 
+. . D . . 
+Perros capturados: 2
+
+Movimiento 20
+
+--- TABLERO KOMIKAN ---
+    D
+  D   D
+D . . D . 
+. . D . . 
+. D . D D 
+D P . . . 
+. . . D D 
+Perros capturados: 0
+
+Movimiento 160
+
+--- TABLERO KOMIKAN ---
+    D
+  .   .
+. . D D . 
+P D . . D 
+. D . D . 
+. . D . . 
+. D . D . 
+Perros capturados: 2
+
+Movimiento 40
+
+--- TABLERO KOMIKAN ---
+    D
+  .   .
+D D D D . 
+. D D . D 
+. D . . . 
+. D . . D 
+P . D . . 
+Perros capturados: 0
+
+Movimiento 60
+
+--- TABLERO KOMIKAN ---
+    .
+  D   D
+. D D D . 
+. D D D . 
+D D . . . 
+P . D . . 
+. . . D . 
+Perros capturados: 0
+
+Movimiento 180
+
+--- TABLERO KOMIKAN ---
+    .
+  .   .
+P D . . D 
+. D . D . 
+D . D D D 
+. . . . . 
+. . D . D 
+Perros capturados: 2
+
+Movimiento 80
+
+--- TABLERO KOMIKAN ---
+    .
+  D   D
+D . . D D 
+D . . D . 
+. . D . . 
+. D D D . 
+P . . . D 
+Perros capturados: 0
+
+Movimiento 200
+
+--- TABLERO KOMIKAN ---
+    .
+  .   .
+D . D . . 
+. D . . D 
+. . P D . 
+. . . . D 
+D D . . D 
+Perros capturados: 3
+
+Movimiento 100
+
+--- TABLERO KOMIKAN ---
+    .
+  D   .
+D D . . D 
+. D D . D 
+D . . . . 
+P D . D D 
+. . D . . 
+Perros capturados: 0
+
+Movimiento 220
+
+--- TABLERO KOMIKAN ---
+    .
+  .   .
+. D . . D 
+D . . D . 
+D . P D . 
+. D . D . 
+. . . D . 
+Perros capturados: 3
+
+Movimiento 120
+
+--- TABLERO KOMIKAN ---
+    .
+  .   D
+D D . . D 
+D . . D . 
+P . . . . 
+. D D . D 
+. . D D . 
+Perros capturados: 1
+
+Movimiento 240
+
+--- TABLERO KOMIKAN ---
+    .
+  .   .
+. D . D . 
+. . D . . 
+D D . . . 
+. . . . D 
+D D P . . 
+Perros capturados: 4
+
+Movimiento 140
+
+--- TABLERO KOMIKAN ---
+    .
+  D   .
+. D . . D 
+D . D . . 
+. . . D D 
+. . D . D 
+P . D . D 
+Perros capturados: 1
+
+Movimiento 160
+
+--- TABLERO KOMIKAN ---
+    .
+  D   D
+D . . . D 
+. . . . . 
+. . . D D 
+P D D D . 
+. . . D D 
+Perros capturados: 1
+
+Movimiento 260
+
+--- TABLERO KOMIKAN ---
+    D
+  .   .
+. . D . . 
+. . . . . 
+D . D D . 
+. D . . . 
+. P . D . 
+Perros capturados: 5
+
+Movimiento 180
+
+--- TABLERO KOMIKAN ---
+    .
+  .   .
+. D . D . 
+. D D . D 
+D D . D . 
+. . D . D 
+. P . . D 
+Perros capturados: 1
+
+--- TABLERO KOMIKAN ---
+    .
+  .   D
+. . D . . 
+D . . D . 
+. D . . . 
+. D . . . 
+. . . P . 
+Perros capturados: 6
+Mesa 1: partida finalizada. Estado: 1, movimientos: 266, capturas: 6.
+Mesa 1: iniciando partida. Puma 9 vs. Perros 10.
+Partida 1: Puma 13 vs. equipo de Perros 14
+
+Movimiento 200
+
+--- TABLERO KOMIKAN ---
+    D
+  .   .
+D . D . D 
+D D . . . 
+D D D . D 
+. . . D . 
+. . P . . 
+Perros capturados: 1
+
+Movimiento 20
+
+--- TABLERO KOMIKAN ---
+    D
+  D   D
+D D . D . 
+. . . . . 
+. P . . D 
+. . D . . 
+D D . D D 
+Perros capturados: 0
+
+Movimiento 220
+
+--- TABLERO KOMIKAN ---
+    .
+  D   .
+D . D . . 
+. D . . D 
+D . D D D 
+. D D . . 
+. . P . . 
+Perros capturados: 1
+
+Movimiento 240
+
+--- TABLERO KOMIKAN ---
+    .
+  .   .
+D D . D . 
+D . D . D 
+. D P D . 
+. D . D . 
+. . . . D 
+Perros capturados: 1
+
+Movimiento 40
+
+--- TABLERO KOMIKAN ---
+    D
+  .   .
+D D D D . 
+. P D . . 
+. . . D . 
+. D . . D 
+D . D D . 
+Perros capturados: 0
+
+Movimiento 260
+
+--- TABLERO KOMIKAN ---
+    .
+  .   .
+D . D . . 
+. D D . D 
+D . . . . 
+. D . D D 
+. . P . D 
+Perros capturados: 2
+
+Movimiento 60
+
+--- TABLERO KOMIKAN ---
+    D
+  D   D
+. D . D . 
+P . . D . 
+. . . . . 
+. . D D D 
+D D . D . 
+Perros capturados: 0
+
+Movimiento 80
+
+--- TABLERO KOMIKAN ---
+    D
+  .   .
+. D . D D 
+D P . D D 
+. D D . . 
+. . . D . 
+. D . . D 
+Perros capturados: 0
+
+Movimiento 280
+
+--- TABLERO KOMIKAN ---
+    .
+  .   .
+. D D D . 
+. D D . . 
+. . . . . 
+. D D . D 
+P . . D . 
+Perros capturados: 3
+
+Movimiento 100
+
+--- TABLERO KOMIKAN ---
+    .
+  D   D
+D . P D . 
+. . D . . 
+D . . . D 
+. . . D D 
+D . . . D 
+Perros capturados: 1
+
+Movimiento 300
+
+--- TABLERO KOMIKAN ---
+    .
+  .   .
+. D D D . 
+. . . D . 
+. . D D . 
+. P . D . 
+. . . D D 
+Perros capturados: 3
+
+Movimiento 120
+
+--- TABLERO KOMIKAN ---
+    .
+  .   D
+D . D D . 
+. . P . D 
+. . D . . 
+D . D . D 
+. . D . D 
+Perros capturados: 1
+
+Movimiento 320
+
+--- TABLERO KOMIKAN ---
+    D
+  .   .
+. D . . . 
+. P D D D 
+. . . D . 
+. . D . D 
+. D . . . 
+Perros capturados: 3
+
+Movimiento 140
+
+--- TABLERO KOMIKAN ---
+    .
+  D   .
+. D . . D 
+. P . . . 
+. . D . D 
+D . D D D 
+. D . . D 
+Perros capturados: 1
+
+Movimiento 340
+
+--- TABLERO KOMIKAN ---
+    .
+  .   .
+. D . . D 
+D . D D . 
+. P D D . 
+. . . D . 
+. . D . . 
+Perros capturados: 3
+
+Movimiento 160
+
+--- TABLERO KOMIKAN ---
+    D
+  P   .
+. . . . . 
+. D D D D 
+D . . . . 
+. D D . . 
+D . . D D 
+Perros capturados: 1
+
+Movimiento 180
+
+--- TABLERO KOMIKAN ---
+    P
+  .   .
+. . D D . 
+D . . . . 
+D D D . D 
+. D . D . 
+. D . . D 
+Perros capturados: 1
+
+Movimiento 360
+
+--- TABLERO KOMIKAN ---
+    D
+  .   D
+. . . . P 
+. . . . D 
+. D . . . 
+. . . . D 
+. D . D . 
+Perros capturados: 5
+
+Movimiento 200
+
+--- TABLERO KOMIKAN ---
+    .
+  .   D
+. . . . . 
+D D . . D 
+D D P . D 
+. . . D . 
+D . . D . 
+Perros capturados: 2
+
+Movimiento 380
+
+--- TABLERO KOMIKAN ---
+    .
+  D   P
+. . . . . 
+D . . . . 
+. . D . D 
+. . D . D 
+. . D . . 
+Perros capturados: 5
+
+Movimiento 220
+
+--- TABLERO KOMIKAN ---
+    .
+  .   .
+. . . D D 
+. . D D . 
+. . D . . 
+D D P . . 
+D D . D . 
+Perros capturados: 2
+
+Movimiento 400
+
+--- TABLERO KOMIKAN ---
+    D
+  .   P
+. . . . . 
+. D D D . 
+. . . . . 
+. . . D . 
+. . D D . 
+Perros capturados: 5
+
+Movimiento 240
+
+--- TABLERO KOMIKAN ---
+    D
+  .   .
+. . D . . 
+. . . D . 
+. . D D D 
+D . P D . 
+D D . . . 
+Perros capturados: 2
+
+Movimiento 260
+
+--- TABLERO KOMIKAN ---
+    .
+  .   .
+. . . . D 
+. . D . . 
+D . P . . 
+D D . D D 
+D . . D D 
+Perros capturados: 2
+
+--- TABLERO KOMIKAN ---
+    D
+  .   .
+. . . . . 
+. . D P . 
+. D . . D 
+. . . . . 
+. . D . D 
+Perros capturados: 6
+Mesa 2: partida finalizada. Estado: 1, movimientos: 406, capturas: 6.
+Mesa 2: iniciando partida. Puma 11 vs. Perros 12.
+Partida 2: Puma 15 vs. equipo de Perros 16
+
+Movimiento 280
+
+--- TABLERO KOMIKAN ---
+    .
+  .   .
+. . . . . 
+. D . D . 
+. D D D . 
+D . D P . 
+. D D D . 
+Perros capturados: 2
+
+Movimiento 20
+
+--- TABLERO KOMIKAN ---
+    D
+  D   D
+D . . D . 
+. . D . . 
+. D . D . 
+D P . D . 
+. . . D D 
+Perros capturados: 0
+
+Movimiento 300
+
+--- TABLERO KOMIKAN ---
+    .
+  .   D
+. D D . . 
+. . . P . 
+D . . . D 
+D . D . D 
+. D . D . 
+Perros capturados: 2
+
+Movimiento 40
+
+--- TABLERO KOMIKAN ---
+    D
+  D   .
+D . D D . 
+. D D . . 
+. D . . . 
+. D . . D 
+P . D D . 
+Perros capturados: 0
+
+Movimiento 60
+
+--- TABLERO KOMIKAN ---
+    .
+  D   D
+. D D . . 
+. D . D . 
+. D D . D 
+. . D . . 
+D P . . D 
+Perros capturados: 0
+
+Movimiento 320
+
+--- TABLERO KOMIKAN ---
+    .
+  .   .
+. D . D D 
+. . . D . 
+D D . P . 
+. D . . D 
+D . D . . 
+Perros capturados: 2
+
+Movimiento 80
+
+--- TABLERO KOMIKAN ---
+    .
+  D   D
+D . D D . 
+D . . D . 
+. D D . . 
+. . . D . 
+. D P . D 
+Perros capturados: 0
+
+Movimiento 340
+
+--- TABLERO KOMIKAN ---
+    .
+  D   D
+. . . D . 
+D . . . P 
+. D . . . 
+D . . . D 
+. D . D . 
+Perros capturados: 3
+
+Movimiento 100
+
+--- TABLERO KOMIKAN ---
+    .
+  D   .
+D . D . D 
+D . . D . 
+D . D . . 
+. D P . D 
+D . . D . 
+Perros capturados: 0
+
+Movimiento 360
+
+--- TABLERO KOMIKAN ---
+    .
+  .   D
+D D . . . 
+. . D P . 
+. . . . D 
+D . . . . 
+. D D . D 
+Perros capturados: 3
+
+Movimiento 120
+
+--- TABLERO KOMIKAN ---
+    D
+  .   .
+D D . D . 
+. D D . . 
+. . D D . 
+. D D . . 
+. . D P D 
+Perros capturados: 0
+
+Movimiento 380
+
+--- TABLERO KOMIKAN ---
+    D
+  D   D
+. . . . . 
+. D . P . 
+D . . D . 
+. . . D D 
+. . D . . 
+Perros capturados: 3
+
+Movimiento 140
+
+--- TABLERO KOMIKAN ---
+    D
+  .   .
+. . . D . 
+. D . D D 
+D P . D . 
+D . D . . 
+. . D . . 
+Perros capturados: 2
+
+Movimiento 160
+
+--- TABLERO KOMIKAN ---
+    D
+  D   .
+. D . . . 
+. P . D . 
+. . . . D 
+D . D D . 
+. . . D D 
+Perros capturados: 2
+
+Movimiento 400
+
+--- TABLERO KOMIKAN ---
+    D
+  .   P
+. D D . . 
+. . . . . 
+. D D . . 
+. . . D . 
+D . D . . 
+Perros capturados: 4
+
+Movimiento 180
+
+--- TABLERO KOMIKAN ---
+    .
+  .   D
+D . D D . 
+. . . . P 
+. D . . D 
+. . . D . 
+. D D . . 
+Perros capturados: 3
+
+Movimiento 420
+
+--- TABLERO KOMIKAN ---
+    .
+  D   D
+. D . P . 
+. . D D . 
+. . . . . 
+. . . . . 
+D . D D . 
+Perros capturados: 4
+
+Movimiento 200
+
+--- TABLERO KOMIKAN ---
+    D
+  .   .
+D . . D . 
+. . D D D 
+. . . . P 
+. D D . . 
+. . . . . 
+Perros capturados: 4
+
+Movimiento 440
+
+--- TABLERO KOMIKAN ---
+    .
+  D   .
+. . D D . 
+. . . . P 
+. D . D . 
+. D . . D 
+. D . . . 
+Perros capturados: 4
+
+Movimiento 220
+
+--- TABLERO KOMIKAN ---
+    .
+  .   .
+D . D . P 
+. . D . . 
+. D D . . 
+. D . . . 
+. . . D . 
+Perros capturados: 5
+
+Movimiento 460
+
+--- TABLERO KOMIKAN ---
+    .
+  .   D
+D . D P . 
+. D . . . 
+. . . D D 
+D . D . . 
+. . . . . 
+Perros capturados: 4
+
+Movimiento 480
+
+--- TABLERO KOMIKAN ---
+    .
+  .   .
+. . P D . 
+D . . D . 
+. . D . D 
+D . . D . 
+. . . . . 
+Perros capturados: 5
+
+Movimiento 240
+
+--- TABLERO KOMIKAN ---
+    .
+  .   .
+D . . D . 
+. . D . P 
+. D . . . 
+. . . . D 
+D . D . . 
+Perros capturados: 5
+
+--- TABLERO KOMIKAN ---
+    .
+  .   D
+. . . . P 
+. D . . D 
+. D . . . 
+D . . . . 
+. . . D . 
+Perros capturados: 6
+Mesa 1: partida finalizada. Estado: 1, movimientos: 489, capturas: 6.
+Mesa 1: iniciando partida. Puma 13 vs. Perros 14.
+Partida 1: Puma 17 vs. equipo de Perros 18
+
+Movimiento 260
+
+--- TABLERO KOMIKAN ---
+    D
+  .   .
+D . . P . 
+. . D . D 
+. . . . D 
+. . . . . 
+. D . . D 
+Perros capturados: 5
+
+Movimiento 20
+
+--- TABLERO KOMIKAN ---
+    D
+  .   D
+D D . D . 
+. . D . . 
+. D . D . 
+D P . D D 
+. . . D . 
+Perros capturados: 0
+
+--- TABLERO KOMIKAN ---
+    .
+  .   D
+D D . . . 
+. . . . D 
+. . . . . 
+. . . P D 
+. . D . . 
+Perros capturados: 6
+Mesa 2: partida finalizada. Estado: 1, movimientos: 273, capturas: 6.
+Mesa 2: iniciando partida. Puma 15 vs. Perros 16.
+Partida 2: Puma 19 vs. equipo de Perros 20
+
+Movimiento 40
+
+--- TABLERO KOMIKAN ---
+    D
+  .   .
+D D D D . 
+. D D . . 
+. D . . . 
+. D D . D 
+. P . D . 
+Perros capturados: 0
+
+Movimiento 60
+
+--- TABLERO KOMIKAN ---
+    .
+  D   D
+. D D D . 
+. D . D . 
+. D . . . 
+. . P D D 
+D . . . D 
+Perros capturados: 0
+
+Movimiento 20
+
+--- TABLERO KOMIKAN ---
+    D
+  D   D
+D . . D . 
+. . D . . 
+. D . D D 
+D P . . . 
+. . . D D 
+Perros capturados: 0
+
+Movimiento 80
+
+--- TABLERO KOMIKAN ---
+    D
+  .   .
+D D . D D 
+. . . D . 
+D . D D . 
+D . . . . 
+. D P D . 
+Perros capturados: 0
+
+Movimiento 40
+
+--- TABLERO KOMIKAN ---
+    D
+  .   .
+D D D D . 
+. D D . D 
+. D . . . 
+. D . . D 
+P . D . . 
+Perros capturados: 0
+
+Movimiento 100
+
+--- TABLERO KOMIKAN ---
+    .
+  D   D
+. D D . . 
+D . . . . 
+. D D D . 
+. D . . D 
+D . . P D 
+Perros capturados: 0
+
+Movimiento 60
+
+--- TABLERO KOMIKAN ---
+    .
+  .   D
+. D D D D 
+. D . D . 
+D D D . . 
+P . D . . 
+. . . . D 
+Perros capturados: 0
+
+Movimiento 120
+
+--- TABLERO KOMIKAN ---
+    .
+  D   .
+. . D D D 
+D . D . . 
+. D D . D 
+D . . . D 
+P . . . . 
+Perros capturados: 1
+
+Movimiento 80
+
+--- TABLERO KOMIKAN ---
+    D
+  D   .
+D . D D D 
+. . . D . 
+D D . D . 
+. . . D . 
+P . . D . 
+Perros capturados: 0
+
+Movimiento 140
+
+--- TABLERO KOMIKAN ---
+    .
+  D   D
+. D . D D 
+D . D . . 
+. P . . D 
+. D . . . 
+. . . D . 
+Perros capturados: 
+Movimiento 100
+
+--- TABLERO KOMIKAN ---
+    .
+  D   D
+D . . D . 
+. D . . D 
+. D D . D 
+P . . D D 
+. D . . . 
+Perros capturados: 0
+2
+
+Movimiento 120
+
+--- TABLERO KOMIKAN ---
+    .
+  .   .
+D . D D . 
+P . D D D 
+. . . D D 
+. . D D . 
+. D D . . 
+Perros capturados: 0
+
+Movimiento 160
+
+--- TABLERO KOMIKAN ---
+    D
+  D   D
+. D . . D 
+. . P . . 
+. D . D . 
+. . . D D 
+. . . D . 
+Perros capturados: 2
+
+Movimiento 140
+
+--- TABLERO KOMIKAN ---
+    .
+  D   D
+. D D . . 
+D . D . D 
+. P . . D 
+. . . D . 
+D D . D . 
+Perros capturados: 0
+
+Movimiento 180
+
+--- TABLERO KOMIKAN ---
+    D
+  D   .
+. D P . D 
+. D . . D 
+. . D D . 
+. . . . D 
+. . . D . 
+Perros capturados: 2
+
+Movimiento 160
+
+--- TABLERO KOMIKAN ---
+    D
+  .   D
+D D D D . 
+. D D . . 
+. . P . . 
+D D . . . 
+. . D . D 
+Perros capturados: 0
+
+Movimiento 200
+
+--- TABLERO KOMIKAN ---
+    D
+  .   .
+D D . . P 
+D . . . . 
+. . D D D 
+. D . . D 
+. . . . . 
+Perros capturados: 3
+
+Movimiento 180
+
+--- TABLERO KOMIKAN ---
+    D
+  .   D
+D D D . D 
+D . D . . 
+. D . . . 
+. . P . . 
+. D D . . 
+Perros capturados: 1
+
+Movimiento 220
+
+--- TABLERO KOMIKAN ---
+    .
+  .   .
+. D P . D 
+D . . . . 
+. D D . D 
+. . . . D 
+. D . . . 
+Perros capturados: 4
+
+Movimiento 200
+
+--- TABLERO KOMIKAN ---
+    .
+  D   D
+D D D . . 
+. . D . D 
+. . . D . 
+D P . . . 
+. D . . . 
+Perros capturados: 2
+
+Movimiento 240
+
+--- TABLERO KOMIKAN ---
+    .
+  .   D
+. . D . . 
+. D . P . 
+. . D . . 
+D . . D . 
+. . D D . 
+Perros capturados: 4
+
+Movimiento 220
+
+--- TABLERO KOMIKAN ---
+    .
+  D   D
+. D . D . 
+D . D . . 
+D D D . . 
+. P . . . 
+. . . D . 
+Perros capturados: 2
+
+Movimiento 260
+
+--- TABLERO KOMIKAN ---
+    .
+  .   D
+. D P . . 
+D . . . . 
+. . D D . 
+. D D D . 
+. . . . . 
+Perros capturados: 4
+
+Movimiento 240
+
+--- TABLERO KOMIKAN ---
+    .
+  D   .
+. D . D . 
+. . . D D 
+D . D . . 
+D . D . . 
+D P . . . 
+Perros capturados: 2
+
+Movimiento 280
+
+--- TABLERO KOMIKAN ---
+    P
+  .   .
+. . D D . 
+D . . D D 
+. . . . D 
+D . . . . 
+. . D . . 
+Perros capturados: 4
+
+Movimiento 260
+
+--- TABLERO KOMIKAN ---
+    .
+  .   D
+D D D . . 
+. . . . . 
+. P . . D 
+D . . . . 
+. D . D D 
+Perros capturados: 3
+
+Movimiento 300
+
+--- TABLERO KOMIKAN ---
+    .
+  .   P
+. . D . D 
+. D . D . 
+D . . . D 
+. . . . . 
+. . . D D 
+Perros capturados: 4
+
+Movimiento 280
+
+--- TABLERO KOMIKAN ---
+    .
+  .   .
+. D D . . 
+D . . . D 
+. . . D . 
+. D P . D 
+. D . D . 
+Perros capturados: 3
+
+Movimiento 300
+
+--- TABLERO KOMIKAN ---
+    D
+  .   .
+. D . D . 
+. . . . D 
+. . D . . 
+D . P . D 
+. . . D . 
+Perros capturados: 4
+
+Movimiento 320
+
+--- TABLERO KOMIKAN ---
+    D
+  .   .
+. . D . . 
+. . . D P 
+D . D . D 
+. . . D . 
+. . . . D 
+Perros capturados: 4
+
+Movimiento 320
+
+--- TABLERO KOMIKAN ---
+    .
+  .   .
+. . D . D 
+D . . . D 
+D . . . D 
+. P . . . 
+D . D . . 
+Perros capturados: 4
+
+Movimiento 340
+
+--- TABLERO KOMIKAN ---
+    D
+  .   .
+. D . P . 
+. . D D D 
+. . . . . 
+. . D . D 
+. . . D . 
+Perros capturados: 4
+
+Movimiento 340
+
+--- TABLERO KOMIKAN ---
+    .
+  D   D
+. . D . D 
+D . . . . 
+. . . . D 
+P . D . . 
+. . D . . 
+Perros capturados: 4
+
+Movimiento 360
+
+--- TABLERO KOMIKAN ---
+    .
+  D   D
+. . D P . 
+. . . . . 
+D . . D . 
+. . . D . 
+. D . D . 
+Perros capturados: 4
+
+Movimiento 380
+
+--- TABLERO KOMIKAN ---
+    .
+  .   .
+D . . D . 
+. D . P D 
+. D . D . 
+. . . . D 
+. . . . . 
+Perros capturados: 5
+
+Movimiento 360
+
+--- TABLERO KOMIKAN ---
+    .
+  .   D
+D D . . . 
+D . . . D 
+. . . . D 
+. . . . D 
+. . P . . 
+Perros capturados: 5
+
+Movimiento 400
+
+--- TABLERO KOMIKAN ---
+    .
+  .   D
+D . . D . 
+. . . D . 
+. D . . . 
+. . . D P 
+. . . D . 
+Perros capturados: 5
+
+Movimiento 380
+
+--- TABLERO KOMIKAN ---
+    .
+  .   D
+. . . . . 
+D . . . D 
+. . . D . 
+. . D . D 
+D . . . P 
+Perros capturados: 5
+
+Movimiento 400
+
+--- TABLERO KOMIKAN ---
+    .
+  D   D
+. . . . . 
+. . . D D 
+. . D . . 
+. D . P . 
+. . . D . 
+Perros capturados: 5
+
+Movimiento 420
+
+--- TABLERO KOMIKAN ---
+    D
+  .   .
+. D . . D 
+. . D D . 
+. . . P . 
+. . . . . 
+. . D D . 
+Perros capturados: 5
+
+--- TABLERO KOMIKAN ---
+    .
+  D   .
+. . . D D 
+. . . D . 
+. P . . . 
+. D . . . 
+. . . . D 
+Perros capturados: 6
+
+Movimiento 440
+
+--- TABLERO KOMIKAN ---
+    .
+  D   D
+. . . D D 
+. . P . . 
+. . . D . 
+. . . D . 
+. . . . D 
+Perros capturados: 5
+Mesa 2: partida finalizada. Estado: 1, movimientos: 406, capturas: 6.
+Mesa 2: iniciando partida. Puma 19 vs. Perros 20.
+
+Movimiento 20
+
+--- TABLERO KOMIKAN ---
+    D
+  D   D
+D D . D . 
+. . . . . 
+. D . D . 
+D P . D . 
+. . . D D 
+Perros capturados: 0
+
+--- TABLERO KOMIKAN ---
+    D
+  .   .
+D . . . D 
+. . . . . 
+. . P D . 
+. . . . D 
+. . D . . 
+Perros capturados: 6
+Mesa 1: partida finalizada. Estado: 1, movimientos: 453, capturas: 6.
+Mesa 1: iniciando partida. Puma 17 vs. Perros 18.
+
+Movimiento 40
+
+--- TABLERO KOMIKAN ---
+    D
+  D   .
+D . D D . 
+. D D . . 
+. D . . . 
+. D D . D 
+P . D . . 
+Perros capturados: 0
+
+Movimiento 20
+
+--- TABLERO KOMIKAN ---
+    D
+  D   D
+D . . D . 
+. . D . . 
+. D . D . 
+D P . D . 
+. . . D D 
+Perros capturados: 0
+
+Movimiento 60
+
+--- TABLERO KOMIKAN ---
+    .
+  D   D
+. D D . . 
+D . . D . 
+. D D . . 
+. . D D . 
+D P . D . 
+Perros capturados: 0
+
+Movimiento 40
+
+--- TABLERO KOMIKAN ---
+    D
+  .   .
+D D D D . 
+. D D . . 
+. D . . . 
+. D D . D 
+P . D . . 
+Perros capturados: 0
+
+Movimiento 80
+
+--- TABLERO KOMIKAN ---
+    D
+  D   .
+D . . D . 
+D . . D . 
+. D . D . 
+. P . D . 
+. D D . D 
+Perros capturados: 0
+
+Movimiento 60
+
+--- TABLERO KOMIKAN ---
+    .
+  D   D
+. D D . . 
+. D . D . 
+D D D . . 
+P . D D . 
+. . . D . 
+Perros capturados: 0
+
+Movimiento 100
+
+--- TABLERO KOMIKAN ---
+    .
+  .   .
+. D . D D 
+D . . D . 
+D P D D D 
+. . D . D 
+D . . . . 
+Perros capturados: 0
+
+Movimiento 80
+
+--- TABLERO KOMIKAN ---
+    D
+  D   .
+D . . D . 
+D . . D . 
+D . D . . 
+. . D . . 
+P . D D D 
+Perros capturados: 0
+
+Movimiento 120
+
+--- TABLERO KOMIKAN ---
+    D
+  .   .
+D . . D D 
+. D D . . 
+. P D . D 
+. D D . . 
+. . D D . 
+Perros capturados: 0
+
+Movimiento 100
+
+--- TABLERO KOMIKAN ---
+    D
+  D   .
+D D D . . 
+. D . D . 
+. D D D . 
+P . . . D 
+. . . D . 
+Perros capturados: 0
+
+Movimiento 140
+
+--- TABLERO KOMIKAN ---
+    .
+  .   D
+P D . D . 
+. . D D . 
+. D D . D 
+D . D D . 
+. . . . . 
+Perros capturados: 1
+
+Movimiento 120
+
+--- TABLERO KOMIKAN ---
+    .
+  .   D
+P . D . . 
+D . D D . 
+D D D . D 
+. . D . . 
+. D . . . 
+Perros capturados: 1
+
+Movimiento 160
+
+--- TABLERO KOMIKAN ---
+    D
+  .   D
+. . P . D 
+. D . D . 
+. . . D . 
+D . D D . 
+. . . . D 
+Perros capturados: 2
+
+Movimiento 140
+
+--- TABLERO KOMIKAN ---
+    .
+  .   .
+. D . D D 
+. . D . D 
+. P . D D 
+. D D . . 
+. . D . . 
+Perros capturados: 2
+
+Movimiento 180
+
+--- TABLERO KOMIKAN ---
+    .
+  .   D
+D . P D . 
+D . . . D 
+. D . . D 
+. D D . . 
+D . . . . 
+Perros capturados: 2
+
+Movimiento 160
+
+--- TABLERO KOMIKAN ---
+    D
+  .   .
+D . . . D 
+D P . . D 
+D . . D . 
+. D . D . 
+. . D . . 
+Perros capturados: 2
+
+Movimiento 200
+
+--- TABLERO KOMIKAN ---
+    .
+  D   .
+. D . D D 
+. . . P D 
+. . . . D 
+. D D . . 
+. D . D . 
+Perros capturados: 2
+
+Movimiento 180
+
+--- TABLERO KOMIKAN ---
+    .
+  D   .
+D . P . D 
+. . . D . 
+. D D . D 
+. . D . . 
+. D . D . 
+Perros capturados: 2
+
+Movimiento 220
+
+--- TABLERO KOMIKAN ---
+    .
+  D   .
+. . D D . 
+D . . P D 
+. D . . D 
+. . D . D 
+. . . D . 
+Perros capturados: 2
+
+Movimiento 200
+
+--- TABLERO KOMIKAN ---
+    .
+  .   .
+D . P D . 
+. . . D D 
+. D D D . 
+D . D . . 
+. . . D . 
+Perros capturados: 2
+
+Movimiento 240
+
+--- TABLERO KOMIKAN ---
+    .
+  .   D
+. . D P . 
+. . D D . 
+. . . D D 
+D . D . D 
+. . D . . 
+Perros capturados: 2
+
+Movimiento 220
+
+--- TABLERO KOMIKAN ---
+    .
+  .   D
+. D D . . 
+D . . . D 
+. D . P . 
+. . D . . 
+. . D . D 
+Perros capturados: 3
+
+Movimiento 260
+
+--- TABLERO KOMIKAN ---
+    D
+  .   D
+. . . D . 
+. . D . D 
+. . P . . 
+D . . . . 
+. D . D D 
+Perros capturados: 3
+
+Movimiento 240
+
+--- TABLERO KOMIKAN ---
+    .
+  .   .
+. . D P . 
+D D D . . 
+. D . . D 
+D . . D . 
+. . . . . 
+Perros capturados: 4
+
+Movimiento 280
+
+--- TABLERO KOMIKAN ---
+    D
+  .   D
+. D . D . 
+. . D . . 
+D . . . D 
+. . P D . 
+. D . . . 
+Perros capturados: 3
+
+Movimiento 260
+
+--- TABLERO KOMIKAN ---
+    .
+  .   .
+P . D . . 
+. D . D . 
+. . D . . 
+. . D . . 
+. D . . D 
+Perros capturados: 5
+
+Movimiento 300
+
+--- TABLERO KOMIKAN ---
+    .
+  .   D
+. . D . D 
+. D . . D 
+. . . P . 
+D . . . D 
+. D . . D 
+Perros capturados: 3
+
+Movimiento 280
+
+--- TABLERO KOMIKAN ---
+    .
+  .   .
+P . D D . 
+. . . . . 
+. D . D . 
+D . . . . 
+. . D . D 
+Perros capturados: 5
+
+Movimiento 320
+
+--- TABLERO KOMIKAN ---
+    .
+  .   D
+. . D D D 
+D . . . . 
+. . D P . 
+. . D . . 
+. . D . D 
+Perros capturados: 3
+
+Movimiento 300
+
+--- TABLERO KOMIKAN ---
+    D
+  .   .
+. . . . . 
+P D . D D 
+. D . . . 
+. . D . . 
+. . . D . 
+Perros capturados: 5
+
+Movimiento 340
+
+--- TABLERO KOMIKAN ---
+    .
+  D   D
+. . . . . 
+D D D D . 
+. P . . . 
+. D D D . 
+. . . . . 
+Perros capturados: 3
+
+Movimiento 320
+
+--- TABLERO KOMIKAN ---
+    .
+  .   D
+D . . D . 
+. . . . . 
+. D . . . 
+P . D . . 
+. D . D . 
+Perros capturados: 5
+
+Movimiento 360
+
+--- TABLERO KOMIKAN ---
+    .
+  D   D
+. D . . . 
+. . D D . 
+. . . . D 
+P . D . . 
+. D . D . 
+Perros capturados: 3
+
+Movimiento 340
+
+--- TABLERO KOMIKAN ---
+    D
+  .   .
+. D . . D 
+. . D . . 
+. . . . . 
+. . . D . 
+. P . D D 
+Perros capturados: 5
+
+Movimiento 380
+
+--- TABLERO KOMIKAN ---
+    D
+  D   .
+. . . . D 
+. . D . D 
+. P . . D 
+D . . D . 
+. . D . . 
+Perros capturados: 3
+
+Movimiento 400
+
+--- TABLERO KOMIKAN ---
+    .
+  D   D
+. D . . . 
+. P D . . 
+. . . D D 
+D . D . D 
+. . . . . 
+Perros capturados: 3
+
+Movimiento 360
+
+--- TABLERO KOMIKAN ---
+    .
+  .   D
+. . . D . 
+D . . . . 
+. . . D . 
+. . D D . 
+. . . P D 
+Perros capturados: 5
+
+Movimiento 420
+
+--- TABLERO KOMIKAN ---
+    .
+  D   .
+. D . D . 
+. . . . D 
+. . D D . 
+P . D . D 
+. D . . . 
+Perros capturados: 3
+
+Movimiento 380
+
+--- TABLERO KOMIKAN ---
+    .
+  .   .
+. D . . D 
+. . D . . 
+D . . D D 
+. . D P . 
+. . . . . 
+Perros capturados: 5
+
+Movimiento 440
+
+--- TABLERO KOMIKAN ---
+    .
+  .   .
+D D . D . 
+. . D . D 
+P . . . . 
+. . . . D 
+. D D D . 
+Perros capturados: 3
+
+Movimiento 460
+
+--- TABLERO KOMIKAN ---
+    D
+  .   .
+. . D . . 
+P . . D D 
+. D . . . 
+. D . . . 
+. . . D D 
+Perros capturados: 4
+
+--- TABLERO KOMIKAN ---
+    .
+  .   .
+D . D . . 
+. . . . D 
+D . . D . 
+. . . . D 
+. P . . . 
+Perros capturados: 6
+Mesa 1: partida finalizada. Estado: 1, movimientos: 391, capturas: 6.
+
+Movimiento 480
+
+--- TABLERO KOMIKAN ---
+    .
+  .   D
+. . D D D 
+. . P . . 
+. . D D . 
+. . . . D 
+. . . D . 
+Perros capturados: 4
+
+Movimiento 500
+
+--- TABLERO KOMIKAN ---
+    .
+  D   D
+. . D . . 
+. . P . D 
+. . . . . 
+. D D . . 
+. . . . D 
+Perros capturados: 5
+
+--- TABLERO KOMIKAN ---
+    P
+  D   D
+. . . . D 
+. . . . . 
+. . . . . 
+. D D . . 
+. . . . D 
+Perros capturados: 6
+Mesa 2: partida finalizada. Estado: 1, movimientos: 502, capturas: 6.
+Torneo finalizado correctamente.

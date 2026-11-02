@@ -7,6 +7,7 @@
 #include <utility>
 #include <vector>
 #include "config.h"
+#include <memory>
 #include <atomic>
 enum class RolJugador {
     PUMA,
@@ -37,6 +38,7 @@ Matchmaker(int totalJugadores, int maxMesas,
     void esperarFinalizacion();
     void solicitarDetencion();
     void detener();
+    bool abandonarJugador(int idMesa, RolJugador rol);
 
 private:
     void gestionarJugadores();
@@ -52,6 +54,7 @@ private:
 
     Config config_;
     std::atomic<bool> detenerSolicitado_{false};
+    std::vector<std::shared_ptr<std::atomic<int>>> abandonoPorMesa_;
     std::mutex mutex_;
     std::condition_variable cv_;
     std::mutex mutexSalida_;

@@ -61,6 +61,7 @@ struct Contexto {
     int retardoMax = 300;
 
     unsigned int semilla = 42;
+    int imprimirCadaMovimientos = 0;
 };
 
 struct DatosHilo {
@@ -248,6 +249,11 @@ void* ejecutarFicha(void* argumento) {
             if (exito) {
                 c.posiciones[id] = destino;
                 c.movimientos++;
+                if (c.imprimirCadaMovimientos > 0 &&
+                    c.movimientos % c.imprimirCadaMovimientos == 0) {
+                    std::cout << "\nMovimiento " << c.movimientos << "\n";
+                    mostrarTablero(*c.tablero);
+                }
 
                 comprobarVictoria(c);
                 break;
@@ -292,6 +298,7 @@ ResultadoSimulacion simularPartida(
     c.retardoMin = config.retardoMinMs;
     c.retardoMax = config.retardoMaxMs;
     c.semilla = config.semilla;
+    c.imprimirCadaMovimientos = config.imprimirCadaMovimientos;
 
     c.posiciones.fill(-1);
 

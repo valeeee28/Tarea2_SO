@@ -1,17 +1,49 @@
+
 #include "../juez.h"
 #include "matchmaker.h"
-#include<algorithm>
+
+#include <algorithm>
+#include <array>
 #include <iostream>
 #include <stdexcept>
+#include <vector>
 
-Matchmaker::Matchmaker(int totalJugadores, int maxMesas, const Config& config)
+namespace {
+
+inline void copiarPerros(
+    std::vector<Posicion>& destino,
+    const std::array<Posicion, 12>& origen
+) {
+    destino.assign(origen.begin(), origen.end());
+}
+
+inline void copiarPerros(
+    std::array<Posicion, 12>& destino,
+    const std::array<Posicion, 12>& origen
+) {
+    destino = origen;
+}
+
+}
+
+Matchmaker::Matchmaker(
+    int totalJugadores,
+    int maxMesas,
+    const Config& config
+)
     : totalJugadores_(totalJugadores),
       maxMesas_(maxMesas),
       config_(config) {
+
     if (totalJugadores < 0 || maxMesas <= 0) {
         throw std::invalid_argument(
-            "La cantidad de jugadores no puede ser negativa "
-            "y debe existir al menos una mesa."
+            "Cantidad de jugadores o mesas invalida"
+        );
+    }
+
+    for (int i = 0; i < maxMesas_; ++i) {
+        abandonoPorMesa_.push_back(
+            std::make_shared<std::atomic<int>>(SIN_ABANDONO)
         );
     }
 }
@@ -33,12 +65,15 @@ void Matchmaker::iniciar() {
 
     for (int i = 0; i < maxMesas_; ++i) {
         hilosMesas_.emplace_back(
-            &Matchmaker::ejecutarPartida, this, i + 1
+            &Matchmaker::ejecutarPartida,
+            this,
+            i + 1
         );
     }
 
     hiloGestor_ = std::thread(
-        &Matchmaker::gestionarJugadores, this
+        &Matchmaker::gestionarJugadores,
+        this
     );
 }
 
@@ -55,16 +90,17 @@ void Matchmaker::esperarFinalizacion() {
         }
     }
 }
+
 void Matchmaker::solicitarDetencion() {
     {
         std::lock_guard<std::mutex> bloqueo(mutex_);
+
         detenido_ = true;
         detenerSolicitado_.store(true);
     }
 
     cv_.notify_all();
 }
-
 
 void Matchmaker::detener() {
     solicitarDetencion();
@@ -81,51 +117,83 @@ void Matchmaker::detener() {
 
     hilosMesas_.clear();
 }
+
+bool Matchmaker::abandonarJugador(
+    int idMesa,
+    RolJugador rol
+) {
+    if (idMesa < 1 || idMesa > maxMesas_) {
+        return false;
+    }
+
+    int valor = (rol == RolJugador::PUMA)
+        ? ABANDONA_PUMA
+        : ABANDONAN_PERROS;
+
+    abandonoPorMesa_[idMesa - 1]->store(valor);
+
+    return true;
+}
+
 void Matchmaker::gestionarJugadores() {
     int idJugador = 1;
 
     while (true) {
         std::unique_lock<std::mutex> bloqueo(mutex_);
 
-        if (detenido_ || jugadoresProcesados_ >= totalJugadores_) {
+        if (
+            detenido_ ||
+            jugadoresProcesados_ >= totalJugadores_
+        ) {
             break;
         }
 
-        if (totalJugadores_ - jugadoresProcesados_ < 2) {
-            std::cout << "Queda un jugador sin pareja.\n";
+        if (
+            totalJugadores_ - jugadoresProcesados_ < 2
+        ) {
+            std::cout
+                << "Queda un jugador sin pareja.\n";
+
             jugadoresProcesados_ = totalJugadores_;
             break;
         }
 
-        cv_.wait(bloqueo, [this] {
-            return detenido_ || colaPartidas_.size() <
-                                   static_cast<std::size_t>(maxMesas_);
-        });
+        cv_.wait(
+            bloqueo,
+            [this] {
+                return detenido_ ||
+                    colaPartidas_.size() <
+                    static_cast<std::size_t>(maxMesas_);
+            }
+        );
 
         if (detenido_) {
             break;
         }
 
-       int mesaAsignada = ((jugadoresProcesados_ / 2) % maxMesas_) + 1;
+        int mesaAsignada =
+            ((jugadoresProcesados_ / 2) % maxMesas_) + 1;
 
-Partida partida{
-    mesaAsignada,
-    {idJugador++, RolJugador::PUMA},
-    {idJugador++, RolJugador::PERROS}
-};
+        Partida partida{
+            mesaAsignada,
+            {idJugador++, RolJugador::PUMA},
+            {idJugador++, RolJugador::PERROS}
+        };
 
         jugadoresProcesados_ += 2;
 
-        std::cout << "Partida " << partida.idMesa
-                  << ": Puma " << partida.puma.id
-                  << " vs. equipo de Perros "
-                  << partida.perros.id << '\n';
+        std::cout
+            << "Partida " << partida.idMesa
+            << ": Puma " << partida.puma.id
+            << " vs. equipo de Perros "
+            << partida.perros.id << '\n';
 
         colaPartidas_.push_back(partida);
 
         bloqueo.unlock();
         cv_.notify_all();
     }
+
     {
         std::lock_guard<std::mutex> bloqueo(mutex_);
         gestorTerminado_ = true;
@@ -134,7 +202,6 @@ Partida partida{
     cv_.notify_all();
 }
 
-
 void Matchmaker::ejecutarPartida(int idMesa) {
     while (true) {
         Partida partida{};
@@ -142,19 +209,22 @@ void Matchmaker::ejecutarPartida(int idMesa) {
         {
             std::unique_lock<std::mutex> bloqueo(mutex_);
 
-            cv_.wait(bloqueo, [this, idMesa] {
-                if (detenido_) {
-                    return true;
-                }
-
-                for (const Partida& pendiente : colaPartidas_) {
-                    if (pendiente.idMesa == idMesa) {
+            cv_.wait(
+                bloqueo,
+                [this, idMesa] {
+                    if (detenido_) {
                         return true;
                     }
-                }
 
-                return gestorTerminado_;
-            });
+                    for (const Partida& pendiente : colaPartidas_) {
+                        if (pendiente.idMesa == idMesa) {
+                            return true;
+                        }
+                    }
+
+                    return gestorTerminado_;
+                }
+            );
 
             if (detenido_) {
                 return;
@@ -172,6 +242,7 @@ void Matchmaker::ejecutarPartida(int idMesa) {
                 if (gestorTerminado_) {
                     return;
                 }
+
                 continue;
             }
 
@@ -182,30 +253,63 @@ void Matchmaker::ejecutarPartida(int idMesa) {
         cv_.notify_all();
 
         ConfigSimulacion configJuez;
+
         configJuez.semilla = config_.seed;
         configJuez.retardoMinMs = config_.delayMinMs;
         configJuez.retardoMaxMs = config_.delayMaxMs;
-        configJuez.duracionMaxMs=config_.duracionMaxMs;
+        configJuez.duracionMaxMs = config_.duracionMaxMs;
+
+        configJuez.posicionesPersonalizadas =
+            config_.posicionesPersonalizadas;
+
+        configJuez.pumaInicial = config_.pumaInicial;
+
+        copiarPerros(
+            configJuez.perrosIniciales,
+            config_.perrosIniciales
+        );
+
+        configJuez.imprimirCadaMovimientos = 20;
+
         {
-            std::lock_guard<std::mutex> bloqueoSalida(mutexSalida_);
-            std::cout << "Mesa " << idMesa
-                      << ": iniciando partida. Puma " << partida.puma.id
-                      << " vs. Perros " << partida.perros.id << ".\n";
+            std::lock_guard<std::mutex> bloqueoSalida(
+                mutexSalida_
+            );
+
+            std::cout
+                << "Mesa " << idMesa
+                << ": iniciando partida. Puma "
+                << partida.puma.id
+                << " vs. Perros "
+                << partida.perros.id
+                << ".\n";
         }
 
+        abandonoPorMesa_[idMesa - 1]->store(
+            SIN_ABANDONO
+        );
+
         ResultadoJuez resultado = ejecutarJuez(
-        idMesa,
-        configJuez,
-        &detenerSolicitado_
-            );  
+            idMesa,
+            configJuez,
+            &detenerSolicitado_,
+            abandonoPorMesa_[idMesa - 1].get()
+        );
+
         {
-            std::lock_guard<std::mutex> bloqueoSalida(mutexSalida_);
-            std::cout << "Mesa " << idMesa
-                      << ": partida finalizada. Estado: "
-                      << resultado.estado
-                      << ", movimientos: " << resultado.movimientos
-                      << ", capturas: " << resultado.capturas << ".\n";
+            std::lock_guard<std::mutex> bloqueoSalida(
+                mutexSalida_
+            );
+
+            std::cout
+                << "Mesa " << idMesa
+                << ": partida finalizada. Estado: "
+                << resultado.estado
+                << ", movimientos: "
+                << resultado.movimientos
+                << ", capturas: "
+                << resultado.capturas
+                << ".\n";
         }
     }
 }
-

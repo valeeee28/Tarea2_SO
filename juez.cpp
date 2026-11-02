@@ -5,6 +5,8 @@
 #include <pthread.h>
 #include <chrono>
 #include <thread>
+#include <set>
+#include <utility>
 
 namespace {
 
@@ -16,7 +18,26 @@ struct DatosJuez {
     ResultadoJuez resultado;
 };
 
-bool prepararTablero(Tablero& tablero) {
+bool prepararTablero(Tablero& tablero, const ConfigSimulacion& config) {
+    if (config.posicionesPersonalizadas) {
+        auto valida = [](Posicion p) {
+            return posicionValida(p.fila, p.columna);
+        };
+        std::set<std::pair<int,int>> posiciones;
+        auto registrar = [&](Posicion p) {
+            return valida(p) && posiciones.insert({p.fila, p.columna}).second;
+        };
+        if (!registrar(config.pumaInicial)) return false;
+        for (const auto& perro : config.perrosIniciales) {
+            if (!registrar(perro)) return false;
+        }
+        if (!colocarFicha(tablero, config.pumaInicial, PUMA)) return false;
+        for (const auto& perro : config.perrosIniciales) {
+            if (!colocarFicha(tablero, perro, PERRO)) return false;
+        }
+        return true;
+    }
+
     if (!colocarFicha(tablero, {2, 2}, PUMA))
         return false;
 
@@ -90,7 +111,7 @@ void* funcionJuez(void* argumento) {
     Tablero tablero;
     inicializarTablero(tablero);
 
-    if (!prepararTablero(tablero)) {
+    if (!prepararTablero(tablero, datos->config)) {
         destruirTablero(tablero);
         return nullptr;
     }

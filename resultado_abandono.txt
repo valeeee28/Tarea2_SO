@@ -1,0 +1,14 @@
+Partida 1: Puma 1 vs. equipo de Perros 2
+Mesa 1: iniciando partida. Puma 1 vs. Perros 2.
+Solicitud de abandono: ACEPTADA
+
+--- TABLERO KOMIKAN ---
+    .
+  D   .
+. D . . D 
+D . D D . 
+. . . . . 
+. D P D D 
+D . . D D 
+Perros capturados: 0
+Mesa 1: partida finalizada. Estado: 2, movimientos: 8, capturas: 0.
