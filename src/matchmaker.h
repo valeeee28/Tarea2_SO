@@ -1,7 +1,5 @@
-
 #ifndef MATCHMAKER_H
 #define MATCHMAKER_H
-
 #include <condition_variable>
 #include <mutex>
 #include <queue>
@@ -9,7 +7,7 @@
 #include <utility>
 #include <vector>
 #include "config.h"
-
+#include <atomic>
 enum class RolJugador {
     PUMA,
     PERROS
@@ -37,6 +35,7 @@ Matchmaker(int totalJugadores, int maxMesas,
 
     void iniciar();
     void esperarFinalizacion();
+    void solicitarDetencion();
     void detener();
 
 private:
@@ -52,6 +51,7 @@ private:
     bool gestorTerminado_ = false;
 
     Config config_;
+    std::atomic<bool> detenerSolicitado_{false};
     std::mutex mutex_;
     std::condition_variable cv_;
     std::mutex mutexSalida_;

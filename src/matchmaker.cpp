@@ -55,15 +55,19 @@ void Matchmaker::esperarFinalizacion() {
         }
     }
 }
-
-
-void Matchmaker::detener() {
+void Matchmaker::solicitarDetencion() {
     {
         std::lock_guard<std::mutex> bloqueo(mutex_);
         detenido_ = true;
+        detenerSolicitado_.store(true);
     }
 
     cv_.notify_all();
+}
+
+
+void Matchmaker::detener() {
+    solicitarDetencion();
 
     if (hiloGestor_.joinable()) {
         hiloGestor_.join();
@@ -77,7 +81,6 @@ void Matchmaker::detener() {
 
     hilosMesas_.clear();
 }
-
 void Matchmaker::gestionarJugadores() {
     int idJugador = 1;
 
@@ -190,8 +193,11 @@ void Matchmaker::ejecutarPartida(int idMesa) {
                       << " vs. Perros " << partida.perros.id << ".\n";
         }
 
-        ResultadoJuez resultado = ejecutarJuez(idMesa, configJuez);
-
+        ResultadoJuez resultado = ejecutarJuez(
+        idMesa,
+        configJuez,
+        &detenerSolicitado_
+            );  
         {
             std::lock_guard<std::mutex> bloqueoSalida(mutexSalida_);
             std::cout << "Mesa " << idMesa
