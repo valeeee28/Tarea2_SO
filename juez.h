@@ -3,12 +3,14 @@
 #define JUEZ_H
 
 #include "simulacion.h"
+#include <atomic>
 
 enum EstadoPartida {
     PARTIDA_ERROR = -1,
     PARTIDA_SIN_GANADOR = 0,
     PARTIDA_GANA_PUMA = 1,
-    PARTIDA_GANAN_PERROS = 2
+    PARTIDA_GANAN_PERROS = 2,
+    PARTIDA_CANCELADA = 3
 };
 
 struct ResultadoJuez {
@@ -20,7 +22,8 @@ struct ResultadoJuez {
 
 ResultadoJuez ejecutarJuez(
     int idMesa,
-    const ConfigSimulacion& config
+    const ConfigSimulacion& config,
+    const std::atomic<bool>* detenerExterno = nullptr
 );
 
 #endif

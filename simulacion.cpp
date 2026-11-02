@@ -2,19 +2,21 @@
 #include "simulacion.h"
 
 #include <pthread.h>
-#include <atomic>
+#include <algorithm>
+#include <array>
 #include <chrono>
-#include <iostream>
 #include <numeric>
 #include <random>
 #include <thread>
 #include <vector>
-#include <algorithm>
+#include <iostream>
 
 namespace {
 
-constexpr int TOTAL_POSICIONES = 28;
 constexpr int TOTAL_FICHAS = 13;
+constexpr int TOTAL_POSICIONES = 28;
+
+using Reloj = std::chrono::steady_clock;
 
 Posicion convertir(int id) {
     if (id < 25) return {id / 5, id % 5};
@@ -23,26 +25,27 @@ Posicion convertir(int id) {
     return {-1, 3};
 }
 
-Casilla leerSinLock(Tablero& tablero, int id) {
-    if (id < 25) {
-        return tablero.celdas[id / 5][id % 5];
-    }
-    return tablero.trono[id - 25];
+Casilla leerSinLock(Tablero& t, int id) {
+    if (id < 25) return t.celdas[id / 5][id % 5];
+    return t.trono[id - 25];
 }
 
 struct Contexto {
-    Tablero* tablero;
-    pthread_mutex_t mutexSimulacion;
+    Tablero* tablero = nullptr;
+    const std::atomic<bool>* detenerExterno = nullptr;
+
+    pthread_mutex_t mutexSimulacion{};
 
     std::atomic<bool> detener{false};
 
-    int posiciones[TOTAL_FICHAS];
+    std::array<int, TOTAL_FICHAS> posiciones{};
+
     int movimientos = 0;
     int ganador = 0;
 
-    int retardoMin;
-    int retardoMax;
-    unsigned int semilla;
+    int retardoMin = 50;
+    int retardoMax = 300;
+    unsigned int semilla = 42;
 };
 
 struct DatosHilo {
@@ -50,7 +53,37 @@ struct DatosHilo {
     int id;
 };
 
+bool cancelacionExterna(const Contexto& c) {
+    return c.detenerExterno != nullptr &&
+           c.detenerExterno->load();
+}
+
+bool debeDetenerse(const Contexto& c) {
+    return c.detener.load() || cancelacionExterna(c);
+}
+
+bool esperarInterrumpible(Contexto& c, int milisegundos) {
+    int transcurridos = 0;
+
+    while (transcurridos < milisegundos) {
+        if (debeDetenerse(c)) return false;
+
+        int tramo = std::min(5, milisegundos - transcurridos);
+
+        std::this_thread::sleep_for(
+            std::chrono::milliseconds(tramo)
+        );
+
+        transcurridos += tramo;
+    }
+
+    return !debeDetenerse(c);
+}
+
+// Requiere mutexSimulacion bloqueado.
 void comprobarVictoria(Contexto& c) {
+    if (debeDetenerse(c)) return;
+
     if (victoriaPuma(*c.tablero)) {
         c.ganador = 1;
         c.detener.store(true);
@@ -62,10 +95,11 @@ void comprobarVictoria(Contexto& c) {
 
 void* ejecutarFicha(void* argumento) {
     auto* datos = static_cast<DatosHilo*>(argumento);
-    Contexto& c = *datos->contexto;
-    const int id = datos->id;
 
-    std::mt19937 generador(
+    Contexto& c = *datos->contexto;
+    int id = datos->id;
+
+    std::mt19937 rng(
         c.semilla + static_cast<unsigned int>(id + 1) * 7919u
     );
 
@@ -76,47 +110,57 @@ void* ejecutarFicha(void* argumento) {
     std::vector<int> destinos(TOTAL_POSICIONES);
     std::iota(destinos.begin(), destinos.end(), 0);
 
-    while (!c.detener.load()) {
-        std::this_thread::sleep_for(
-            std::chrono::milliseconds(retardo(generador))
-        );
+    while (!debeDetenerse(c)) {
+        if (!esperarInterrumpible(c, retardo(rng))) {
+            break;
+        }
 
         pthread_mutex_lock(&c.mutexSimulacion);
 
-        if (c.detener.load() || c.posiciones[id] == -1) {
+        if (debeDetenerse(c) || c.posiciones[id] == -1) {
             pthread_mutex_unlock(&c.mutexSimulacion);
             break;
         }
 
         int origen = c.posiciones[id];
 
-        std::shuffle(
-            destinos.begin(), destinos.end(), generador
-        );
+        std::shuffle(destinos.begin(), destinos.end(), rng);
 
         for (int destino : destinos) {
+            if (debeDetenerse(c)) break;
+
             Posicion desde = convertir(origen);
             Posicion hasta = convertir(destino);
 
             bool exito = false;
+            bool captura = false;
 
             if (id == 0) {
-                exito = capturarPerro(*c.tablero, desde, hasta);
+                captura = capturarPerro(
+                    *c.tablero, desde, hasta
+                );
 
-                if (exito) {
-                    
+                exito = captura;
+
+                if (captura) {
                     Posicion medio = {
                         (desde.fila + hasta.fila) / 2,
                         (desde.columna + hasta.columna) / 2
                     };
 
-                    for (int perro = 1; perro < TOTAL_FICHAS; perro++) {
+                    for (int perro = 1;
+                         perro < TOTAL_FICHAS;
+                         perro++) {
+
                         if (c.posiciones[perro] == -1) continue;
 
-                        Posicion p = convertir(c.posiciones[perro]);
+                        Posicion p = convertir(
+                            c.posiciones[perro]
+                        );
 
                         if (p.fila == medio.fila &&
                             p.columna == medio.columna) {
+
                             c.posiciones[perro] = -1;
                             break;
                         }
@@ -125,12 +169,15 @@ void* ejecutarFicha(void* argumento) {
             }
 
             if (!exito) {
-                exito = moverFicha(*c.tablero, desde, hasta);
+                exito = moverFicha(
+                    *c.tablero, desde, hasta
+                );
             }
 
             if (exito) {
                 c.posiciones[id] = destino;
                 c.movimientos++;
+
                 comprobarVictoria(c);
                 break;
             }
@@ -146,30 +193,35 @@ void* ejecutarFicha(void* argumento) {
 
 ResultadoSimulacion simularPartida(
     Tablero& tablero,
-    const ConfigSimulacion& config
+    const ConfigSimulacion& config,
+    const std::atomic<bool>* detenerExterno
 ) {
     ResultadoSimulacion resultado;
 
     if (config.retardoMinMs < 1 ||
         config.retardoMaxMs < config.retardoMinMs ||
         config.duracionMaxMs < 1) {
-        std::cerr << "Configuracion invalida\n";
         return resultado;
     }
 
-    Contexto contexto{};
-    contexto.tablero = &tablero;
-    contexto.retardoMin = config.retardoMinMs;
-    contexto.retardoMax = config.retardoMaxMs;
-    contexto.semilla = config.semilla;
+    if (detenerExterno && detenerExterno->load()) {
+        resultado.motivo = FIN_CANCELACION;
+        return resultado;
+    }
 
-    std::fill(
-        std::begin(contexto.posiciones),
-        std::end(contexto.posiciones),
-        -1
-    );
+    Contexto c;
+    c.tablero = &tablero;
+    c.detenerExterno = detenerExterno;
+    c.retardoMin = config.retardoMinMs;
+    c.retardoMax = config.retardoMaxMs;
+    c.semilla = config.semilla;
+    c.posiciones.fill(-1);
 
-    pthread_mutex_init(&contexto.mutexSimulacion, nullptr);
+    if (pthread_mutex_init(
+        &c.mutexSimulacion, nullptr
+    ) != 0) {
+        return resultado;
+    }
 
     int pumas = 0;
     int perros = 0;
@@ -181,11 +233,12 @@ ResultadoSimulacion simularPartida(
 
         if (ficha == PUMA) {
             pumas++;
-            contexto.posiciones[0] = i;
+            c.posiciones[0] = i;
         } else if (ficha == PERRO) {
             perros++;
+
             if (perros <= 12) {
-                contexto.posiciones[perros] = i;
+                c.posiciones[perros] = i;
             }
         }
     }
@@ -193,66 +246,80 @@ ResultadoSimulacion simularPartida(
     pthread_mutex_unlock(&tablero.mutex);
 
     if (pumas != 1 || perros != 12) {
-        std::cerr << "Se requiere 1 Puma y 12 Perros\n";
-        pthread_mutex_destroy(&contexto.mutexSimulacion);
+        pthread_mutex_destroy(&c.mutexSimulacion);
         return resultado;
     }
 
     pthread_t hilos[TOTAL_FICHAS];
     DatosHilo datos[TOTAL_FICHAS];
 
-    comprobarVictoria(contexto);
+    bool errorCreacion = false;
 
-    if (!contexto.detener.load()) {
-        for (int i = 0; i < TOTAL_FICHAS; i++) {
-            datos[i] = {&contexto, i};
+    comprobarVictoria(c);
 
-            int error = pthread_create(
-                &hilos[i],
-                nullptr,
-                ejecutarFicha,
-                &datos[i]
-            );
+    for (int i = 0; i < TOTAL_FICHAS; i++) {
+        if (debeDetenerse(c)) break;
 
-            if (error != 0) {
-                std::cerr << "Error al crear hilo " << i << "\n";
-                contexto.detener.store(true);
-                break;
-            }
+        datos[i] = {&c, i};
 
-            resultado.hilosCreados++;
+        if (pthread_create(
+            &hilos[i],
+            nullptr,
+            ejecutarFicha,
+            &datos[i]
+        ) != 0) {
+            errorCreacion = true;
+            c.detener.store(true);
+            break;
         }
 
-        auto inicio = std::chrono::steady_clock::now();
+        resultado.hilosCreados++;
+    }
 
-        while (!contexto.detener.load()) {
-            std::this_thread::sleep_for(
-                std::chrono::milliseconds(10)
-            );
+    auto inicio = Reloj::now();
+    bool tiempoAgotado = false;
 
-            auto transcurrido =
-                std::chrono::duration_cast<std::chrono::milliseconds>(
-                    std::chrono::steady_clock::now() - inicio
-                ).count();
-
-            if (transcurrido >= config.duracionMaxMs) {
-                contexto.detener.store(true);
-            }
+    while (!debeDetenerse(c) && !errorCreacion) {
+        if (Reloj::now() - inicio >=
+            std::chrono::milliseconds(config.duracionMaxMs)) {
+            tiempoAgotado = true;
+            c.detener.store(true);
+            break;
         }
+
+        std::this_thread::sleep_for(
+            std::chrono::milliseconds(5)
+        );
     }
 
     for (int i = 0; i < resultado.hilosCreados; i++) {
         pthread_join(hilos[i], nullptr);
     }
 
-    resultado.movimientos = contexto.movimientos;
-    resultado.ganador = contexto.ganador;
+    resultado.movimientos = c.movimientos;
+    resultado.ganador = c.ganador;
 
     pthread_mutex_lock(&tablero.mutex);
     resultado.capturas = tablero.perrosCapturados;
     pthread_mutex_unlock(&tablero.mutex);
 
-    pthread_mutex_destroy(&contexto.mutexSimulacion);
+    if (errorCreacion) {
+        resultado.motivo = FIN_ERROR;
+        resultado.ganador = 0;
+    } else if (cancelacionExterna(c)) {
+        resultado.motivo = FIN_CANCELACION;
+        resultado.ganador = 0;
+    } else if (c.ganador == 1) {
+        resultado.motivo = FIN_VICTORIA_PUMA;
+    } else if (c.ganador == 2) {
+        resultado.motivo = FIN_VICTORIA_PERROS;
+    } else if (tiempoAgotado) {
+        resultado.motivo = FIN_TIEMPO;
+    } else {
+        resultado.motivo = FIN_ERROR;
+    }
+
+    pthread_mutex_destroy(&c.mutexSimulacion);
 
     if (config.imprimirTableroFinal) {
         mostrarTablero(tablero);

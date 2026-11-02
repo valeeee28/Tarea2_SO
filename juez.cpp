@@ -1,5 +1,6 @@
 
 #include "juez.h"
+
 #include <iostream>
 #include <pthread.h>
 
@@ -8,6 +9,7 @@ namespace {
 struct DatosJuez {
     int idMesa;
     ConfigSimulacion config;
+    const std::atomic<bool>* detenerExterno;
     ResultadoJuez resultado;
 };
 
@@ -17,13 +19,13 @@ bool prepararTablero(Tablero& tablero) {
     }
 
     for (int columna = 0; columna < 5; columna++) {
-        if (!colocarFicha(tablero, {0, columna}, PERRO)) {
-            return false;
-        }
+        if (!colocarFicha(
+            tablero, {0, columna}, PERRO
+        )) return false;
 
-        if (!colocarFicha(tablero, {4, columna}, PERRO)) {
-            return false;
-        }
+        if (!colocarFicha(
+            tablero, {4, columna}, PERRO
+        )) return false;
     }
 
     return colocarFicha(tablero, {1, 0}, PERRO) &&
@@ -31,70 +33,88 @@ bool prepararTablero(Tablero& tablero) {
 }
 
 void* funcionJuez(void* argumento) {
-    DatosJuez* datos = static_cast<DatosJuez*>(argumento);
+    auto* datos = static_cast<DatosJuez*>(argumento);
+
+    if (datos->detenerExterno &&
+        datos->detenerExterno->load()) {
+        datos->resultado.estado = PARTIDA_CANCELADA;
+        return nullptr;
+    }
 
     Tablero tablero;
     inicializarTablero(tablero);
 
-    std::cout << "\n[MESA " << datos->idMesa
-              << "] Iniciando partida\n";
-
     if (!prepararTablero(tablero)) {
-        std::cerr << "[MESA " << datos->idMesa
-                  << "] Error al preparar tablero\n";
-
         destruirTablero(tablero);
         return nullptr;
     }
 
-    ResultadoSimulacion simulacion =
-        simularPartida(tablero, datos->config);
-        
+    ResultadoSimulacion simulacion = simularPartida(
+        tablero,
+        datos->config,
+        datos->detenerExterno
+    );
 
-    datos->resultado.movimientos = simulacion.movimientos;
-    datos->resultado.capturas = simulacion.capturas;
-    datos->resultado.hilosCreados = simulacion.hilosCreados;
+    datos->resultado.movimientos =
+        simulacion.movimientos;
 
-    if (simulacion.hilosCreados != 13) {
-        datos->resultado.estado = PARTIDA_ERROR;
-    } else if (simulacion.ganador == 1) {
-        datos->resultado.estado = PARTIDA_GANA_PUMA;
-    } else if (simulacion.ganador == 2) {
-        datos->resultado.estado = PARTIDA_GANAN_PERROS;
-    } else {
-        datos->resultado.estado = PARTIDA_SIN_GANADOR;
+    datos->resultado.capturas =
+        simulacion.capturas;
+
+    datos->resultado.hilosCreados =
+        simulacion.hilosCreados;
+
+    switch (simulacion.motivo) {
+        case FIN_VICTORIA_PUMA:
+            datos->resultado.estado = PARTIDA_GANA_PUMA;
+            break;
+
+        case FIN_VICTORIA_PERROS:
+            datos->resultado.estado = PARTIDA_GANAN_PERROS;
+            break;
+
+        case FIN_TIEMPO:
+            datos->resultado.estado = PARTIDA_SIN_GANADOR;
+            break;
+
+        case FIN_CANCELACION:
+            datos->resultado.estado = PARTIDA_CANCELADA;
+            break;
+
+        default:
+            datos->resultado.estado = PARTIDA_ERROR;
+            break;
     }
 
-    std::cout << "[MESA " << datos->idMesa
-              << "] Partida finalizada\n";
-
     destruirTablero(tablero);
-
     return nullptr;
 }
 
-} 
+} // namespace
 
 ResultadoJuez ejecutarJuez(
     int idMesa,
-    const ConfigSimulacion& config
+    const ConfigSimulacion& config,
+    const std::atomic<bool>* detenerExterno
 ) {
+    ResultadoJuez error;
+
     DatosJuez datos{};
     datos.idMesa = idMesa;
     datos.config = config;
+    datos.detenerExterno = detenerExterno;
 
     pthread_t hiloJuez;
 
-    int error = pthread_create(
+    if (pthread_create(
         &hiloJuez,
         nullptr,
         funcionJuez,
         &datos
-    );
-
-    if (error != 0) {
-        std::cerr << "No se pudo crear el juez\n";
-        return datos.resultado;
+    ) != 0) {
+        std::cerr << "Error creando juez de mesa "
+                  << idMesa << "\n";
+        return error;
     }
 
     pthread_join(hiloJuez, nullptr);
