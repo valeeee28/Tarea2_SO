@@ -13,17 +13,31 @@ enum EstadoPartida {
     PARTIDA_CANCELADA = 3
 };
 
+enum AbandonoJugador {
+    SIN_ABANDONO = 0,
+    ABANDONA_PUMA = 1,
+    ABANDONAN_PERROS = 2
+};
+
 struct ResultadoJuez {
     EstadoPartida estado = PARTIDA_ERROR;
     int movimientos = 0;
     int capturas = 0;
     int hilosCreados = 0;
+    bool victoriaPorAbandono = false;
 };
 
 ResultadoJuez ejecutarJuez(
     int idMesa,
     const ConfigSimulacion& config,
     const std::atomic<bool>* detenerExterno = nullptr
+);
+
+ResultadoJuez ejecutarJuez(
+    int idMesa,
+    const ConfigSimulacion& config,
+    const std::atomic<bool>* detenerExterno,
+    const std::atomic<int>* abandonoJugador
 );
 
 #endif
