@@ -113,22 +113,90 @@ bool movimientoValido(Tablero& t,Posicion o,Posicion d) {
     pthread_mutex_unlock(&t.mutex);
     return ok;
 }
-bool moverFicha(Tablero& t,Posicion o,Posicion d) {
-    int a=indice(o),b=indice(d);
+
+bool moverFicha(
+    Tablero& t,
+    Posicion o,
+    Posicion d,
+    Casilla fichaEsperada
+) {
+    int a = indice(o);
+    int b = indice(d);
+
     pthread_mutex_lock(&t.mutex);
-    bool ok=normalSinLock(t,a,b);
-    if(ok) { celda(t,b)=celda(t,a); celda(t,a)=VACIA; }
+
+    bool ok = a >= 0 &&
+              b >= 0 &&
+              fichaEsperada != VACIA &&
+              celda(t, a) == fichaEsperada &&
+              normalSinLock(t, a, b);
+
+    if (ok) {
+        celda(t, b) = celda(t, a);
+        celda(t, a) = VACIA;
+    }
+
     pthread_mutex_unlock(&t.mutex);
     return ok;
 }
-bool capturarPerro(Tablero& t,Posicion o,Posicion d) {
-    int a=indice(o),b=indice(d),m=-1;
+
+bool moverFicha(
+    Tablero& t,
+    Posicion o,
+    Posicion d
+) {
+    int a = indice(o);
+
+    if (a < 0) {
+        return false;
+    }
+
     pthread_mutex_lock(&t.mutex);
-    bool ok=saltoSinLock(t,a,b,m);
-    if(ok) { celda(t,a)=VACIA; celda(t,m)=VACIA; celda(t,b)=PUMA; ++t.perrosCapturados; }
+    Casilla ficha = celda(t, a);
+    pthread_mutex_unlock(&t.mutex);
+
+    return moverFicha(t, o, d, ficha);
+}
+
+
+bool capturarPerro(
+    Tablero& t,
+    Posicion o,
+    Posicion d,
+    Posicion* perroCapturado
+) {
+    int a = indice(o);
+    int b = indice(d);
+    int m = -1;
+
+    pthread_mutex_lock(&t.mutex);
+
+    bool ok = saltoSinLock(t, a, b, m);
+
+    if (ok) {
+        if (perroCapturado != nullptr) {
+            *perroCapturado = posicion(m);
+        }
+
+        celda(t, a) = VACIA;
+        celda(t, m) = VACIA;
+        celda(t, b) = PUMA;
+
+        ++t.perrosCapturados;
+    }
+
     pthread_mutex_unlock(&t.mutex);
     return ok;
 }
+
+bool capturarPerro(
+    Tablero& t,
+    Posicion o,
+    Posicion d
+) {
+    return capturarPerro(t, o, d, nullptr);
+}
+
 bool victoriaPuma(Tablero& t) {
     pthread_mutex_lock(&t.mutex);
     bool ok=t.perrosCapturados>=6;

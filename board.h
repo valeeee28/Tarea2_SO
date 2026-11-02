@@ -38,4 +38,20 @@ bool pumaTieneMovimientos(Tablero& tablero);
 bool victoriaPerros(Tablero& tablero);
 
 bool colocarFicha(Tablero& tablero,Posicion p,Casilla ficha);
+
+
+bool moverFicha(
+    Tablero& tablero,
+    Posicion origen,
+    Posicion destino,
+    Casilla fichaEsperada
+);
+
+bool capturarPerro(
+    Tablero& tablero,
+    Posicion origen,
+    Posicion destino,
+    Posicion* perroCapturado
+);
+
 #endif
