@@ -68,3 +68,7 @@ Testing/
 .cache/
 
 /torneo
+
+# Ejecutables de pruebas
+/test_abandono
+/test_abandono_matchmaker
