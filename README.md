@@ -19,11 +19,17 @@ El proyecto se organiza en los siguientes módulos:
 ### 3. Requisitos
 
 -Windows 10/11 con Ubuntu mediante WSL, o Linux.
+
 -Ubuntu instalado (en caso de utilizar WSL)
+
 -Visual Studio Code.
+
 -Extensión WSL de Visual Studio Code (si se utiliza WSL).
+
 -Compilador G++.
+
 -Soporte para C++17.
+
 -Biblioteca de hilos POSIX (pthread).
 
 ### 4. Compilación
