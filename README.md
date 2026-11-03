@@ -4,8 +4,18 @@
 ### 1. Descripción del proyecto
 
 El proyecto consiste en la implementación de un sistema concurrente para simular partidas del juego Komikan. El programa permite administrar múltiples partidas simultáneamente mediante hilos, gestionar jugadores y mesas, controlar el desarrollo de las partidas y manejar situaciones como el abandono de jugadores y la interrupción del torneo.
+### 2. Reglas del juego
 
-### 2. Estructura del proyecto
+El juego Komikan enfrenta a dos equipos: un Puma y doce Perros, que se ubican en un tablero con conexiones entre sus posiciones.
+
+- **Puma:** es controlado por un jugador y debe realizar movimientos válidos dentro del tablero.
+- **Perros:** son doce fichas que trabajan en conjunto para intentar acorralar al Puma.
+- **Movimientos:** las fichas solo pueden desplazarse entre posiciones conectadas del tablero, respetando las reglas del juego.
+- **Capturas:** el Puma puede capturar Perros mediante movimientos de captura válidos.
+- **Trono:** el tablero contempla conexiones especiales que deben respetarse al realizar movimientos y capturas.
+
+El sistema valida los movimientos y las capturas para mantener la integridad del tablero y determinar el resultado de cada partida.
+### 3. Estructura del proyecto
 
 El proyecto se organiza en los siguientes módulos:
 
@@ -16,7 +26,7 @@ El proyecto se organiza en los siguientes módulos:
 - `juez.h` y `juez.cpp`: control y validación del desarrollo de las partidas.
 - `simulacion.h` y `simulacion.cpp`: ejecución de la simulación concurrente.
 
-### 3. Requisitos
+### 4. Requisitos
 
 -Windows 10/11 con Ubuntu mediante WSL, o Linux.
 
@@ -32,7 +42,7 @@ El proyecto se organiza en los siguientes módulos:
 
 -Biblioteca de hilos POSIX (pthread).
 
-### 4. Compilación
+### 5. Compilación
 
 Desde la carpeta raíz del repositorio, ejecutar:
 
@@ -40,7 +50,7 @@ Desde la carpeta raíz del repositorio, ejecutar:
 g++ -Wall -Wextra -std=c++17 -pthread src/main.cpp src/matchmaker.cpp config.cpp juez.cpp simulacion.cpp board.cpp -o torneo
 ```
 
-### 5. Ejecución
+### 6. Ejecución
 Para iniciar el torneo se debe ejecutar el programa indicando dos parámetros obligatorios:
 ./torneo 4 2
 El programa recibe como parámetros la cantidad de jugadores y la cantidad máxima de mesas.
@@ -67,7 +77,7 @@ Se puede indicar un tercer parámetro opcional para utilizar un archivo de confi
 
 Este archivo permite establecer parámetros de simulación, como los retardos, la semilla, la duración máxima y las posiciones iniciales de las fichas.
 
-### 6. Concurrencia y control del torneo
+### 7. Concurrencia y control del torneo
 
 El sistema utiliza hilos para ejecutar partidas de manera concurrente y administrar los movimientos de los jugadores.
 
@@ -81,7 +91,7 @@ Además, se contempla:
 - Detención ordenada del torneo mediante SIGINT (Ctrl+C).
 - Priorización de la interrupción del torneo frente a solicitudes de abandono.
 
-### 7. Pruebas realizadas
+### 8. Pruebas realizadas
 
 Se realizaron pruebas de funcionamiento, concurrencia e integridad:
 
@@ -96,6 +106,3 @@ Se realizaron pruebas de funcionamiento, concurrencia e integridad:
 | Prueba del trono | 9/9 aprobadas |
 | Configuración inválida | Rechazada correctamente |
 
-### 8. Conclusión
-
-La implementación permite ejecutar partidas de Komikan de forma concurrente, administrar los recursos disponibles y controlar correctamente la finalización de las partidas y del torneo. Las pruebas realizadas permitieron verificar el funcionamiento de los módulos, la integridad del tablero y el comportamiento del sistema ante situaciones de concurrencia, abandono e interrupción.
